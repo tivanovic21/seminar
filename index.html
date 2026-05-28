@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="hr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dopplerov efekt i RSSI oko bazne stanice</title>
+  </head>
+  <body>
+    <canvas id="scene"></canvas>
+
+    <main class="hud" aria-label="Telemetrija simulacije">
+      <section class="panel primary">
+        <div class="panel-title">Doppler oko bazne stanice</div>
+        <div class="metric-grid">
+          <div>
+            <span>Udaljenost</span>
+            <strong id="distance">0.0 m</strong>
+          </div>
+          <div>
+            <span>RSSI</span>
+            <strong id="rssi">-30 dBm</strong>
+          </div>
+          <div>
+            <span>Dopplerov pomak</span>
+            <strong id="doppler">0.0 Hz</strong>
+          </div>
+          <div>
+            <span>Radijalna brzina</span>
+            <strong id="radial">0.0 m/s</strong>
+          </div>
+          <div>
+            <span>Brzina</span>
+            <strong id="speed">0.0 km/h</strong>
+          </div>
+          <div>
+            <span>Učinak Dopplera</span>
+            <strong id="motion-state">bočno gibanje</strong>
+          </div>
+          <div class="metric-wide">
+            <span>Efektivna udaljenost za izračun</span>
+            <strong id="effective-distance">d_eff = max(d, 1 m)</strong>
+          </div>
+        </div>
+        <div class="bars" id="bars" aria-label="Indikator jačine prijema">
+          <i></i><i></i><i></i><i></i><i></i>
+        </div>
+      </section>
+
+      <section class="panel demo">
+        <div class="panel-title">Tri ključna slučaja</div>
+        <div class="button-row">
+          <button type="button" data-demo="toward">Približavanje</button>
+          <button type="button" data-demo="away">Udaljavanje</button>
+          <button type="button" data-demo="tangent">Paralelno</button>
+        </div>
+      </section>
+
+      <section class="panel formula">
+        <div class="panel-title">Izračun u ovom trenutku</div>
+        <code id="radial-formula">v_r = v · cos(theta)</code>
+        <code id="doppler-formula">f_D = (v_r / c) · f_c</code>
+        <code id="rssi-formula">RSSI = RSSI_1m - 10 · n · log10(d_eff)</code>
+      </section>
+
+      <section class="panel controls">
+        <div class="panel-title">Kontrole</div>
+        <p><kbd>W</kbd>/<kbd>↑</kbd> ubrzaj · <kbd>S</kbd>/<kbd>↓</kbd> koči / unatrag</p>
+        <p><kbd>A</kbd>/<kbd>←</kbd> lijevo · <kbd>D</kbd>/<kbd>→</kbd> desno · <kbd>R</kbd> resetiraj vozilo</p>
+      </section>
+    </main>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
